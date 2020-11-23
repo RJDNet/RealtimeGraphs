@@ -1,0 +1,8 @@
+﻿{
+  "profiles": {
+    "Kestrel": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:3001;http://localhost:3000"
+    }
+  }
+}

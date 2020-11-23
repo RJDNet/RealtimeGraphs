@@ -1,0 +1,11 @@
+# # Ignore everything
+# **
+
+# # Allow files and directories
+# !/bin/Release
+
+.vs
+.vscode
+.dockerignore
+Dockerfile
+Dockerfile.prod
