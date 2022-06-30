@@ -1,0 +1,7 @@
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\kestrelwebserver.exe
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\appsettings.Development.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\appsettings.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\kestrelwebserver.dll
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\kestrelwebserver.deps.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\kestrelwebserver.runtimeconfig.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\bin\Debug\net6.0\publish\kestrelwebserver.pdb

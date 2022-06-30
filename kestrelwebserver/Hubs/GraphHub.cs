@@ -1,19 +1,11 @@
 using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
 
-namespace SignalRGraph.Hubs
+namespace SignalRGraph.Hubs;
+
+public class GraphHub : Hub
 {
-  public class GraphHub : Hub
-  {
-    public async Task SendConnectionId(string connectionId)
+    public async Task SendConnectionIdToClient(string token)
     {
-      // await Clients.All.SendAsync("setClientMessage", "A connection with ID '" + connectionId + "' has just connected");
-      await Clients.All.SendAsync("setClientMessage", connectionId);
+        await Clients.All.SendAsync("sendConnectionIdToClient", token);
     }
-
-    // public async Task SendTopicData(string connectionId)
-    // {
-    //   // await Clients.All.SendAsync("setClientMessage", "A connection with ID '" + connectionId + "' has just connected");
-    // }
-  }
 }

@@ -1,0 +1,7 @@
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\kestrelwebserver.exe
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\appsettings.Development.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\appsettings.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\kestrelwebserver.dll
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\kestrelwebserver.deps.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\kestrelwebserver.runtimeconfig.json
+C:\Users\rdbea\Desktop\Dev\OtherProjects\RealtimeApp\kestrelwebserver\out\kestrelwebserver.pdb

@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+
+  reverseproxy:
+    build: ./reverseproxy
+    container_name: reverseproxy
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - kestrelwebserver
+
+  kestrelwebserver:
+    build: ./kestrelwebserver
+    container_name: kestrelwebserver
+    restart: always
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Development
+    expose:
+      - 5000

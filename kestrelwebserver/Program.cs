@@ -1,40 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using redditservice;
+using SignalRGraph.Hubs;
+using graphservice;
 
-namespace kestrelwebserver
+string corsOrigins = "_corsOrigins";
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
 {
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-      CreateHostBuilder(args)
-        .Build()
-        .Run();
-    }
+    options.AddPolicy(name: corsOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .AllowCredentials();
+                    });
+});
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((builderContext, config) =>
-            {
-              config.AddEnvironmentVariables();
-            })
-            .ConfigureServices(services =>
-            {
-              // Register Hosted Services
-              // Could be a totally seperate microservice
-              services.AddHostedService<TimedHostedService>();
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-              webBuilder.UseStartup<Startup>();
-            });
-  }
-}
+builder.Services.AddSignalR(o => o.EnableDetailedErrors = true);
+builder.Services.AddHostedService<GraphService>();
+
+var app = builder.Build();
+
+app.UseRouting();
+
+app.UseCors(corsOrigins);
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHub<GraphHub>("/graphHub");
+});
+
+app.Run();

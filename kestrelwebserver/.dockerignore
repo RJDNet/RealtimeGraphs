@@ -7,5 +7,7 @@
 .vs
 .vscode
 .dockerignore
+bin/
+obj/
 Dockerfile
 Dockerfile.prod

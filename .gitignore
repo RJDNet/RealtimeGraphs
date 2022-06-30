@@ -1,3 +1,5 @@
 /kestrelwebserver/bin
+/kestrelwebserver/.vscode
+
 /reactclient/node_modules
 /reactclient/build
