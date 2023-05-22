@@ -36,11 +36,12 @@ const SignalRClient: React.FC = (): JSX.Element => {
           .then(() => {
             stopInterval();
 
-            hubConnection.on('SendConnectionIdToClient', (connectionId) => {
+            hubConnection.on('SendConnectionIdToClient', (connectionId: string) => {
+              console.log(`SignalR Connection Id: ${connectionId}`);
               setClientId(connectionId);
             });
         
-            hubConnection.on('SendClientMessage', data => {
+            hubConnection.on('SendClientMessage', (data: number[][]) => {
               setClientMessage(data);
             });
             
