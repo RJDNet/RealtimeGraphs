@@ -11,31 +11,53 @@ const hubUrl: string = process.env.NODE_ENV === 'development' ?
 
 const hubConnection = new signalR.HubConnectionBuilder()
   .withUrl(hubUrl)
-  .configureLogging(signalR.LogLevel.Debug)
+  .configureLogging(signalR.LogLevel.Information)
   .build();
 
+let interval: NodeJS.Timer;
+
+function stopInterval(): void {
+  clearInterval(interval);
+}
+
 const SignalRClient: React.FC = (): JSX.Element => {
-  const [clientState, setClientState] = useState<string>('Connecting...');
+  const [clientState, setClientState] = useState<string>('');
   const [clientId, setClientId] = useState<string>('');
   const [clientMessage, setClientMessage] = useState<number[][]>([]);
 
   useEffect(() => {
-    hubConnection.on('SendConnectionIdToClient', (connectionId) => {
-      setClientId(connectionId);
-    });
+    interval = setInterval(attemptConnection, 2000);
 
-    hubConnection.on('SendClientMessage', data => {
-      setClientMessage(data);
-    });
+    function attemptConnection(): void {
+        console.log('Connecting to SignalR...');
 
-    hubConnection.start()
-      .then(() => {
-        setClientState(hubConnection.state)
-        hubConnection.invoke('SendConnectionIdToClient', hubConnection.connectionId);
-      })
-      .catch(() => setClientState('Failed to Connect'));
+        hubConnection
+          .start()
+          .then(() => {
+            stopInterval();
+
+            hubConnection.on('SendConnectionIdToClient', (connectionId) => {
+              setClientId(connectionId);
+            });
+        
+            hubConnection.on('SendClientMessage', data => {
+              setClientMessage(data);
+            });
+            
+            setClientState(hubConnection.state)
+            hubConnection.invoke('SendConnectionIdToClient', hubConnection.connectionId);
+          
+            console.log('Connected to SignalR');
+          })
+          .catch(() => {
+            setClientState('Failed to Connect');
+            console.log('Failed to connect to SignalR');
+            stopInterval();
+          });
+      }
 
       return function closeConnection() {
+        stopInterval();
         hubConnection.stop();
         hubConnection.off('SendConnectionIdToClient');
         hubConnection.off('SendClientMessage');
